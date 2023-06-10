@@ -17,3 +17,19 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// USER Routes
+// create an account
+// log in
+
+
+// TEAM Routes
+// list
+// show
+// players
+
+
+// TRANSFER Routes
+// list
+// set player
+// buy player
