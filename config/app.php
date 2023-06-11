@@ -1,5 +1,6 @@
 <?php
 
+use App\Providers\BindingsServiceProvider;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 
@@ -163,6 +164,7 @@ return [
         /*
          * Application Service Providers...
          */
+        BindingsServiceProvider::class,
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
