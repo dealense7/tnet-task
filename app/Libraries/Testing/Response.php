@@ -90,8 +90,6 @@ class Response extends TestResponse
     {
         parent::assertOk();
 
-        $this->assertJsonSuccessStructure();
-
         return $this;
     }
 

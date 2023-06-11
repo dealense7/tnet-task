@@ -3,26 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
+use App\Http\Resources\TokenResource;
+use App\Services\AuthServices;
 use App\Services\UserServices;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\ValidationException;
+use Illuminate\Http\Resources\Json\JsonResource;
 
-class AuthController extends Controller
+class AuthController extends ApiController
 {
-    public function login(LoginRequest $request, UserServices $services)
+    public function login(
+        LoginRequest $request,
+        UserServices $services,
+        AuthServices $authServices
+    ): JsonResource
     {
         $data = $request->validated();
 
-        $user = $services->findByEmail($request->email);
+        $user = $services->findByEmail($data['email']);
+        $accessToken = $authServices->login($data['password'], $user);
 
-        if (!$user || !Hash::check($request->password, $user->password)) {
-            throw ValidationException::withMessages([
-                'email' => ['The provided credentials are incorrect.'],
-            ]);
-        }
-
-        $token = $user->createToken('auth-token')->plainTextToken;
-
-        return response()->json(['token' => $token]);
+        return new TokenResource($accessToken);
     }
 }

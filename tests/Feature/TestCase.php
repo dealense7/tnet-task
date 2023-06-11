@@ -2,11 +2,15 @@
 
 namespace Tests\Feature;
 
+use App\Libraries\Testing\ProvideDataStructures;
 use App\Libraries\Testing\Response;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase
 {
+    use DatabaseTransactions;
+    use ProvideDataStructures;
 
     public function jsonWithHeader($method, $uri, array $data = [], array $headers = []): Response
     {
