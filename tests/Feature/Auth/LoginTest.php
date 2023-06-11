@@ -5,8 +5,6 @@ declare(strict_types = 1);
 namespace Tests\Feature\Auth;
 
 use App\Libraries\Testing\ProvideTestingData;
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\Feature\TestCase;
 
@@ -23,7 +21,7 @@ class LoginTest extends TestCase
     public function it_should_raise_error_for_wrong_data(): void
     {
         ProvideTestingData::createUserRandomItems([
-            'email' => 'user@test.com'
+            'email' => 'user@test.com',
         ], 1)->first();
         $data = [
             'email' => 'wrong@test.com',
@@ -38,7 +36,7 @@ class LoginTest extends TestCase
     {
         ProvideTestingData::createUserRandomItems([
             'email' => 'user@test.com',
-            'password' => 'password'
+            'password' => 'password',
         ], 1)->first();
         $data = [
             'email' => 'user@test.com',
@@ -53,7 +51,7 @@ class LoginTest extends TestCase
     {
         ProvideTestingData::createUserRandomItems([
             'email' => 'user@test.com',
-            'password' => 'password'
+            'password' => 'password',
         ], 1)->first();
         $data = [
             'email' => 'user@test.com',

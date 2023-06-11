@@ -4,7 +4,6 @@ declare(strict_types = 1);
 
 namespace App\Services;
 
-use App\Contracts\Repositories\UserRepositoryContract;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
