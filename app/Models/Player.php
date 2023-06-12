@@ -10,17 +10,19 @@ namespace App\Models;
  * @property string $first_name
  * @property string $last_name
  * @property int $age
+ * @property int $type
  * @property int $market_value
  */
 class Player extends Model
 {
-    protected $table    = 'teams';
+    protected $table    = 'players';
     protected $fillable = [
         'name',
         'country_id',
         'first_name',
         'last_name',
         'age',
+        'type',
         'market_value',
     ];
 
@@ -47,6 +49,11 @@ class Player extends Model
     public function getAge(): int
     {
         return $this->age;
+    }
+
+    public function getType(): int
+    {
+        return $this->type;
     }
 
     public function getMarketValue(): int

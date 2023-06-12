@@ -13,6 +13,7 @@ return new class extends Migration {
             $table->string('last_name');
             $table->integer('age');
             $table->bigInteger('market_value');
+            $table->integer('type');
             $table->foreignId('country_id')->constrained('countries');
             $table->timestamps();
         });
