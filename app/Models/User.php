@@ -29,6 +29,7 @@ class User extends Model implements
     use Authorizable;
     use CanResetPassword;
 
+    protected $table    = 'users';
     protected $fillable = [
         'name',
         'email',
