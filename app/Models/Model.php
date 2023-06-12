@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model as BaseModel;
 
 /**
- * @mixin Builder
+ * @mixin \Illuminate\Database\Eloquent\Builder
  */
 class Model extends BaseModel
 {

@@ -17,6 +17,9 @@ class UserRepository implements UserRepositoryContract
 
     public function update(User $item, array $data): User
     {
+        $item->fill($data);
+        $item->saveOrFail();
+
         return $item;
     }
 

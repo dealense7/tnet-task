@@ -15,7 +15,22 @@ trait ProvideDataStructures
         ],
     ];
 
+    private array $user_structure = [
+        'type',
+        'id',
+        'attributes' => [
+            'name',
+            'email',
+        ],
+    ];
+
     public function tokenStructure(): array
     {
         return $this->token_structure;
-    }}
+    }
+
+    public function userStructure(): array
+    {
+        return $this->user_structure;
+    }
+}

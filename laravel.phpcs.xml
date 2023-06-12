@@ -61,6 +61,7 @@
     <rule ref="SlevomatCodingStandard.Classes.ClassStructure">
         <exclude-pattern>/tests/*</exclude-pattern>
     </rule>
+    <rule ref="SlevomatCodingStandard.Namespaces.FullyQualifiedClassNameInAnnotation"/>
     <rule ref="SlevomatCodingStandard.TypeHints.NullTypeHintOnLastPosition"/>
     <rule ref="SlevomatCodingStandard.Arrays.TrailingArrayComma"/>
     <rule ref="SlevomatCodingStandard.Namespaces.UnusedUses"/>

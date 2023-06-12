@@ -4,25 +4,28 @@ declare(strict_types = 1);
 
 namespace App\Providers;
 
-// use Illuminate\Support\Facades\Gate;
+use App\Contracts\AuthUserContract;
+use App\Contracts\Models\UserContract;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
 {
-    /**
-     * The model to policy mappings for the application.
-     *
-     * @var array<class-string, class-string>
-     */
     protected $policies = [
         //
     ];
 
-    /**
-     * Register any authentication / authorization services.
-     */
     public function boot(): void
     {
         //
+    }
+
+    public function register(): void
+    {
+        $this->app->singleton(AuthUserContract::class, static function (Application $app): null|UserContract {
+            $auth = $app['auth'];
+
+            return $auth->user();
+        });
     }
 }

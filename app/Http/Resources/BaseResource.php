@@ -9,7 +9,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 abstract class BaseResource extends JsonResource
 {
-    public abstract function structure(): array;
+    public abstract function transformToExternal(): array;
 
     public function toArray(Request $request): array
     {
@@ -17,7 +17,7 @@ abstract class BaseResource extends JsonResource
             'id' => data_get($this->resource, 'id'),
             'type' => class_basename($this->resource),
             'attributes' => [
-                ...$this->structure(),
+                ...$this->transformToExternal(),
             ],
         ];
     }

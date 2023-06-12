@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace App\Services;
 
 use App\Contracts\Repositories\UserRepositoryContract;
+use App\DataTransferObjects\UserDto;
 use App\Models\User;
 
 class UserServices
@@ -23,5 +24,11 @@ class UserServices
     public function findById(int $id): ?User
     {
         return $this->repository->findById($id);
+    }
+
+    public function create(array $data): User
+    {
+        $dto = UserDto::toInternal($data);
+        return $this->repository->create($dto);
     }
 }

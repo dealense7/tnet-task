@@ -4,15 +4,15 @@ declare(strict_types = 1);
 
 namespace App\Http\Resources;
 
-
+/**
+ * @property string $plainTextToken
+ */
 class TokenResource extends BaseResource
 {
-    public function structure(): array
+    public function transformToExternal(): array
     {
-        /** @var NewAccessToken $token */
-        $token = $this;
         return [
-            'token' => $token->plainTextToken,
+            'token' => $this->plainTextToken,
         ];
     }
 }
