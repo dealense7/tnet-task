@@ -21,7 +21,7 @@ class PlayersSellRequest extends FormRequest
             'items'            => [
                 'required',
                 'array',
-                new CheckPlayersOwner($playerRepository)
+                new CheckPlayersOwner($playerRepository),
             ],
             'items.*.playerId' => [
                 'required',

@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Rules;
 
 use App\Contracts\Repositories\PlayerRepositoryContract;
-use App\Exceptions\HttpException;
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Support\Arr;
