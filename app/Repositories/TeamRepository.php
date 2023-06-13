@@ -28,7 +28,8 @@ class TeamRepository implements TeamRepositoryContract
         /** @var \App\Models\Team|null $team */
         $team = $this->getModel()
             ->with([
-                'players',
+                'players.country',
+                'country',
             ])->find($id);
 
         return $team;
@@ -40,7 +41,8 @@ class TeamRepository implements TeamRepositoryContract
         $item->saveOrFail();
 
         $item->load([
-            'players',
+            'players.country',
+            'country',
         ]);
 
         return $item;
