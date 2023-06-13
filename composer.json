@@ -44,6 +44,9 @@
         "phpcs": [
             "vendor/bin/phpcs --standard=laravel.phpcs.xml -spn --encoding=utf-8 --report-width=150 --colors --parallel=16 app/ config/ tests/"
         ],
+        "test": [
+            "@php artisan test"
+        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
