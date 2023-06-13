@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Libraries\Testing;
 
+use App\Models\Country;
 use App\Models\Player;
 use App\Models\Team;
 use App\Models\User;
@@ -30,6 +31,11 @@ class ProvideTestingData
     public static function createTeamRandomItems(array $params = [], int $count = 5): Collection
     {
         return Team::factory()->count($count)->create($params);
+    }
+
+    public static function createCountryRandomItems(array $params = [], int $count = 5): Collection
+    {
+        return Country::factory()->count($count)->create($params);
     }
 
     public static function createPlayerRandomItems(array $params = [], int $count = 5): Collection

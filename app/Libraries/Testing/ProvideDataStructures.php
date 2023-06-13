@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Libraries\Testing;
 
@@ -24,6 +24,14 @@ trait ProvideDataStructures
         'attributes' => [
             'name',
             'email',
+        ],
+    ];
+
+    private array $country_structure = [
+        'type',
+        'id',
+        'attributes' => [
+            'name',
         ],
     ];
 
@@ -74,6 +82,14 @@ trait ProvideDataStructures
         return $structure;
     }
 
+    public function countryStructure(array $relations = []): array
+    {
+        $structure = $this->country_structure;
+
+        $this->includeNestedRelations($structure, $relations);
+
+        return $structure;
+    }
 
     protected function includeNestedRelations(array &$item, array $relations): void
     {

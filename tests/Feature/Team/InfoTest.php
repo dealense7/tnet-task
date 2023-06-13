@@ -8,7 +8,7 @@ use App\Libraries\Testing\ProvideTestingData;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\Feature\TestCase;
 
-class TeamInfoTest extends TestCase
+class InfoTest extends TestCase
 {
     #[Test()]
     public function it_should_raise_unauthenticated(): void

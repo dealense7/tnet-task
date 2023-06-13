@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CountryController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -22,16 +23,15 @@ Route::prefix('v1')->group(function () {
         // Team Routes
         Route::prefix('team')->group(function () {
             Route::get('/', [TeamController::class, 'info']);
+            Route::patch('/{id}', [TeamController::class, 'update']);
+        });
+
+        // Team Routes
+        Route::prefix('countries')->group(function () {
+            Route::get('/', [CountryController::class, 'findItems']);
         });
     });
 });
-
-
-// TEAM Routes
-// list
-// show
-// players
-
 
 // TRANSFER Routes
 // list

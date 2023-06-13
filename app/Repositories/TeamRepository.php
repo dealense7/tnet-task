@@ -12,13 +12,37 @@ class TeamRepository implements TeamRepositoryContract
 
     public function findByUserId(int $userId): ?Team
     {
+        /** @var \App\Models\Team|null $team */
         $team = $this->getModel()
             ->with([
                 'players',
             ])
-            ->where('user_id', $userId);
+            ->firstWhere('user_id', $userId);
 
-        return $team->first();
+        return $team;
+    }
+
+    public function findById(int $id): ?Team
+    {
+        /** @var \App\Models\Team|null $team */
+        $team = $this->getModel()
+            ->with([
+                'players',
+            ])->find($id);
+
+        return $team;
+    }
+
+    public function update(Team $item, array $data): Team
+    {
+        $item->fill($data);
+        $item->saveOrFail();
+
+        $item->load([
+            'players',
+        ]);
+
+        return $item;
     }
 
     public function getModel(): Team

@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Http\Resources;
 
@@ -18,13 +18,21 @@ abstract class BaseResource extends JsonResource
 
     public function toArray(Request $request): array
     {
-        return [
+        $data = [
             'id'         => data_get($this->resource, 'id'),
             'type'       => class_basename($this->resource),
             'attributes' => [
                 ...$this->transformToExternal(),
             ],
-            'relationships' => $this->relationships(),
         ];
+
+        if (!empty($this->relationships())) {
+            $data = [
+                ...$data,
+                'relationships' => $this->relationships(),
+            ];
+        }
+
+        return $data;
     }
 }

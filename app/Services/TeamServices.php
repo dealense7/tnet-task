@@ -4,8 +4,11 @@ declare(strict_types = 1);
 
 namespace App\Services;
 
+use App\Contracts\AuthUserContract;
 use App\Contracts\Repositories\TeamRepositoryContract;
+use App\DataTransferObjects\TeamDto;
 use App\Enums\PlayerPosition;
+use App\Exceptions\HttpException;
 use App\Exceptions\ItemNotFoundException;
 use App\Models\Player;
 use App\Models\Team;
@@ -15,7 +18,8 @@ use Illuminate\Support\Collection;
 class TeamServices
 {
     public function __construct(
-        private readonly TeamRepositoryContract $repository
+        private readonly TeamRepositoryContract $repository,
+        private readonly ?AuthUserContract $user,
     )
     {
     }
@@ -28,6 +32,28 @@ class TeamServices
         }
 
         return $team;
+    }
+
+    public function findByIdOrFail(int $id): Team
+    {
+        $team = $this->repository->findById($id);
+        if (!$team) {
+            throw new ItemNotFoundException();
+        }
+
+        return $team;
+    }
+
+    public function update(Team $item, array $data): Team
+    {
+        if ($item->getUserId() !== $this->user->getId())
+        {
+            throw new HttpException('This is not your team', 403);
+        }
+
+        $dto = TeamDto::toInternal($data);
+
+        return $this->repository->update($item, $dto);
     }
 
     public function generateTeam(User $user): Team
