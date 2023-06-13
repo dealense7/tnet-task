@@ -44,6 +44,14 @@ trait ProvideDataStructures
         ],
     ];
 
+    private array $transfer_structure = [
+        'type',
+        'id',
+        'attributes' => [
+            'price',
+        ],
+    ];
+
     private array $player_structure = [
         'type',
         'id',
@@ -85,6 +93,15 @@ trait ProvideDataStructures
     public function countryStructure(array $relations = []): array
     {
         $structure = $this->country_structure;
+
+        $this->includeNestedRelations($structure, $relations);
+
+        return $structure;
+    }
+
+    public function transferStructure(array $relations = []): array
+    {
+        $structure = $this->transfer_structure;
 
         $this->includeNestedRelations($structure, $relations);
 

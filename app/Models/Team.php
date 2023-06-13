@@ -22,6 +22,7 @@ class Team extends Model
     protected $table    = 'teams';
     protected $fillable = [
         'name',
+        'balance',
         'country_id',
         'user_id',
     ];

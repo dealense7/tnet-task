@@ -5,10 +5,14 @@ declare(strict_types = 1);
 namespace App\Providers;
 
 use App\Contracts\Repositories\CountryRepositoryContract;
+use App\Contracts\Repositories\PlayerRepositoryContract;
 use App\Contracts\Repositories\TeamRepositoryContract;
+use App\Contracts\Repositories\TransferRepositoryContract;
 use App\Contracts\Repositories\UserRepositoryContract;
 use App\Repositories\CountryRepository;
+use App\Repositories\PlayerRepository;
 use App\Repositories\TeamRepository;
+use App\Repositories\TransferRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Support\ServiceProvider;
 
@@ -16,14 +20,20 @@ class BindingsServiceProvider extends ServiceProvider
 {
 
     private const REPOSITORIES = [
-        UserRepositoryContract::class    => [
+        UserRepositoryContract::class     => [
             UserRepository::class,
         ],
-        TeamRepositoryContract::class    => [
+        TeamRepositoryContract::class     => [
             TeamRepository::class,
         ],
-        CountryRepositoryContract::class => [
+        PlayerRepositoryContract::class   => [
+            PlayerRepository::class,
+        ],
+        CountryRepositoryContract::class  => [
             CountryRepository::class,
+        ],
+        TransferRepositoryContract::class => [
+            TransferRepository::class,
         ],
     ];
 

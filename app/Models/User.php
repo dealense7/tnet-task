@@ -8,6 +8,7 @@ use App\Contracts\AuthUserContract;
 use App\Contracts\Models\UserContract;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Foundation\Auth\Access\Authorizable;
@@ -17,6 +18,8 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
  * @property string $name
  * @property string $email
  * @property string $password
+ *
+ * @property \App\Models\Team $team
  */
 class User extends Model implements
     UserContract,
@@ -31,6 +34,9 @@ class User extends Model implements
     use CanResetPassword;
 
     protected $table    = 'users';
+    protected $with     = [
+        'team',
+    ];
     protected $fillable = [
         'name',
         'email',
@@ -60,5 +66,10 @@ class User extends Model implements
     public function getEmail(): string
     {
         return $this->email;
+    }
+
+    public function team(): HasOne
+    {
+        return $this->hasOne(Team::class, 'user_id');
     }
 }

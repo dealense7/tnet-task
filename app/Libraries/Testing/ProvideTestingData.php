@@ -7,6 +7,7 @@ namespace App\Libraries\Testing;
 use App\Models\Country;
 use App\Models\Player;
 use App\Models\Team;
+use App\Models\Transfer;
 use App\Models\User;
 use Illuminate\Support\Collection;
 use Laravel\Sanctum\Sanctum;
@@ -41,5 +42,10 @@ class ProvideTestingData
     public static function createPlayerRandomItems(array $params = [], int $count = 5): Collection
     {
         return Player::factory()->count($count)->create($params);
+    }
+
+    public static function createTransferRandomItems(array $params = [], int $count = 5): Collection
+    {
+        return Transfer::factory()->count($count)->create($params);
     }
 }

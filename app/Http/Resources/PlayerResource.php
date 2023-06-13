@@ -15,7 +15,7 @@ class PlayerResource extends BaseResource
             'firstName'   => $player->getFirstName(),
             'lastName'    => $player->getLastName(),
             'age'         => $player->getAge(),
-            'marketValue' => $player->getMarketValue(),
+            'marketValue' => $player->getFormattedMarketValue(),
             'position'    => $player->getTypeToText(),
         ];
     }

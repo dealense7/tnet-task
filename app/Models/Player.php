@@ -77,6 +77,11 @@ class Player extends Model
         return $this->market_value;
     }
 
+    public function getFormattedMarketValue(): string
+    {
+        return number_format($this->getMarketValue() / 100, 2);
+    }
+
     public function team(): BelongsTo
     {
         return $this->belongsTo(Team::class, 'team_id');

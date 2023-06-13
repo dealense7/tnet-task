@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\TeamController;
+use App\Http\Controllers\TransferController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,14 +27,16 @@ Route::prefix('v1')->group(function () {
             Route::patch('/{id}', [TeamController::class, 'update']);
         });
 
-        // Team Routes
+        // Country Routes
         Route::prefix('countries')->group(function () {
             Route::get('/', [CountryController::class, 'findItems']);
         });
+
+        // Transfer Routes
+        Route::prefix('transfers')->group(function () {
+            Route::get('/', [TransferController::class, 'findItems']);
+            Route::post('/sell', [TransferController::class, 'sellPlayers']);
+            Route::post('/buy', [TransferController::class, 'buyPlayers']);
+        });
     });
 });
-
-// TRANSFER Routes
-// list
-// set player
-// buy player
