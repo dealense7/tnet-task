@@ -46,6 +46,8 @@ class InfoTest extends TestCase
         $response->assertOk();
         $response->assertJsonDataItemStructure($this->teamStructure([
             '[players:player]',
+            '[players].country',
+            'country',
         ]));
     }
 }

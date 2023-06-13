@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace App\Http\Resources;
 
 
+
 class TeamResource extends BaseResource
 {
     public function transformToExternal(): array
@@ -21,6 +22,7 @@ class TeamResource extends BaseResource
     {
         return [
             'players' => PlayerResource::collection($this->whenLoaded('players')),
+            'country' => CountryResource::make($this->whenLoaded('country')),
         ];
     }
 }

@@ -19,4 +19,11 @@ class PlayerResource extends BaseResource
             'position'    => $player->getTypeToText(),
         ];
     }
+
+    public function relationships(): array
+    {
+        return [
+            'country' => CountryResource::make($this->whenLoaded('country')),
+        ];
+    }
 }

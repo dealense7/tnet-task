@@ -139,9 +139,9 @@ trait ProvideDataStructures
             // get to the bottom of the relation tree
             if (Str::startsWith($currentRelation, '[')) {
                 $currentRelation = trim($currentRelation, '[]');
-                $this->includeNestedRelation($item['relationships'][$currentRelation]['data'][0], $parentRelations);
+                $this->includeNestedRelation($item['relationships'][$currentRelation][0], $parentRelations);
             } else {
-                $this->includeNestedRelation($item['relationships'][$currentRelation]['data'], $parentRelations);
+                $this->includeNestedRelation($item['relationships'][$currentRelation], $parentRelations);
             }
         }
     }

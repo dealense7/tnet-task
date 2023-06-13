@@ -15,7 +15,8 @@ class TeamRepository implements TeamRepositoryContract
         /** @var \App\Models\Team|null $team */
         $team = $this->getModel()
             ->with([
-                'players',
+                'players.country',
+                'country',
             ])
             ->firstWhere('user_id', $userId);
 
