@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Tests\Feature\Transfer;
 
@@ -46,14 +46,14 @@ class SellPlayersTest extends TestCase
             'items' => [
                 [
                     'playerId' => $player->getId(),
-                    'price'    => 1500000,
+                    'price' => 1500000,
                 ],
             ],
         ];
 
         $response = $this->jsonWithHeader('POST', $this->url('transfers/sell'), $data);
 
-        $response->assertForbidden();
+        $response->assertJsonValidationErrors('items');
     }
 
     #[Test()]
@@ -73,7 +73,7 @@ class SellPlayersTest extends TestCase
             'items' => [
                 [
                     'playerId' => $player->getId(),
-                    'price'    => 1500000,
+                    'price' => 1500000,
                 ],
             ],
         ];
@@ -89,7 +89,7 @@ class SellPlayersTest extends TestCase
             (new Transfer())->getTable(),
             [
                 'player_id' => $player->getId(),
-                'price'     => 1500000 * 100,
+                'price' => 1500000 * 100,
             ]
         );
     }

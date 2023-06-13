@@ -34,19 +34,6 @@ class TransferServices
 
     public function sellPlayers(array $data): Collection
     {
-        $ids = Arr::pluck($data, 'playerId');
-
-        $players = $this->playerService->findByIds($ids);
-
-        $idsOfTeamOwners = $players->pluck('team')->pluck('user_id')->unique()->toArray();
-
-        if (
-            count($idsOfTeamOwners) > 1
-            || !in_array($this->user->getId(), $idsOfTeamOwners)
-        ) {
-            throw new HttpException('You can only sell your own players', 403);
-        }
-
         return $this->database->transaction(function () use ($data) {
             return $this->repository->sellPlayers($data);
         });
