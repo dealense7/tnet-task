@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Country;
+use Faker\Generator;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -9,15 +11,26 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class TeamFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
-            //
+            'name'       => $this->generateFootballTeamName($this->faker),
+            'country_id' => (new Country())->inRandomOrder()?->first()?->getId() ?? Country::factory()->count(30)->create()->first()?->getId()
         ];
+    }
+
+    function generateFootballTeamName(Generator $faker): string
+    {
+        $prefixes = ['FC', 'United', 'Athletic', 'Real', 'City', 'Sporting', 'Olympic'];
+        $suffixes = ['United', 'FC', 'Athletic', 'City', 'Rovers', 'Wanderers', 'Eagles'];
+
+        $prefix = $faker->randomElement($prefixes);
+        $suffix = $faker->randomElement($suffixes);
+
+        if ($prefix === $suffix) {
+            $suffix .= ' ' . $faker->randomElement(['Team', 'Club']);
+        }
+
+        return $prefix . ' ' . $suffix;
     }
 }

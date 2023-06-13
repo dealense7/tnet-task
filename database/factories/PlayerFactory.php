@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Country;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,10 @@ class PlayerFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'first_name' => $this->faker->firstName,
+            'last_name'  => $this->faker->lastName,
+            'age'        => rand(18, 40),
+            'country_id' => (new Country())->inRandomOrder()?->first()?->getId()
         ];
     }
 }

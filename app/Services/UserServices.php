@@ -11,7 +11,8 @@ use App\Models\User;
 class UserServices
 {
     public function __construct(
-        private readonly UserRepositoryContract $repository
+        private readonly UserRepositoryContract $repository,
+        private readonly TeamServices           $teamService
     )
     {
     }
@@ -29,6 +30,10 @@ class UserServices
     public function create(array $data): User
     {
         $dto = UserDto::toInternal($data);
-        return $this->repository->create($dto);
+        $user = $this->repository->create($dto);
+
+        $this->teamService->generateTeam($user);
+
+        return $user;
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Country;
+use App\Models\Team;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,7 +16,8 @@ return new class extends Migration {
             $table->integer('age');
             $table->bigInteger('market_value');
             $table->integer('type');
-            $table->foreignId('country_id')->constrained('countries');
+            $table->foreignId('country_id')->constrained((new Country())->getTable());
+            $table->foreignId('team_id')->constrained((new Team())->getTable());
             $table->timestamps();
         });
     }

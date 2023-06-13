@@ -5,6 +5,8 @@ declare(strict_types = 1);
 namespace Tests\Feature\Auth;
 
 use App\Libraries\Testing\ProvideTestingData;
+use App\Models\Team;
+use App\Models\User;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\Feature\TestCase;
 
@@ -55,7 +57,33 @@ class RegisterTest extends TestCase
             'password'              => 'password',
             'password_confirmation' => 'password',
         ];
+
+
+        $this->assertDatabaseMissing(
+            (new User())->getTable(),
+            [
+                'email' => 'user@test.com',
+            ]
+        );
+
         $response = $this->jsonWithHeader('POST', $this->url('auth/register'), $data);
+
+        // User is created
+        $this->assertDatabaseHas(
+            (new User())->getTable(),
+            [
+                'email' => 'user@test.com',
+            ]
+        );
+
+        // User has a Team
+        $this->assertDatabaseHas(
+            (new Team())->getTable(),
+            [
+                'user_id' => (new User())->firstWhere('email', 'user@test.com')->getId(),
+            ]
+        );
+
         $response->assertOk();
         $response->assertJsonDataItemStructure($this->tokenStructure());
     }

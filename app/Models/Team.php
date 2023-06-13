@@ -5,17 +5,22 @@ declare(strict_types = 1);
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property int $id
  * @property int $country_id
  * @property int $user_id
+ * @property int $balance
  * @property string $name
+ * @property \App\Models\User $owner
+ * @property \App\Models\Country $country
+ * @property \Illuminate\Support\Collection $players
  */
 class Team extends Model
 {
-    protected $table      = 'teams';
-    protected $fillable   = [
+    protected $table    = 'teams';
+    protected $fillable = [
         'name',
         'country_id',
         'user_id',
@@ -41,6 +46,11 @@ class Team extends Model
         return $this->name;
     }
 
+    public function getBalance(): int
+    {
+        return $this->balance;
+    }
+
     public function owner(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
@@ -49,5 +59,13 @@ class Team extends Model
     public function country(): BelongsTo
     {
         return $this->belongsTo(Country::class, 'country_id');
+    }
+
+    public function players(): HasMany
+    {
+        return $this->hasMany(
+            Player::class,
+            'team_id',
+        );
     }
 }

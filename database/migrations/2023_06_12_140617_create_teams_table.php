@@ -10,6 +10,7 @@ return new class extends Migration {
         Schema::create('teams', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->bigInteger('balance');
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('country_id')->constrained('countries');
             $table->timestamps();

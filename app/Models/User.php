@@ -13,6 +13,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 
 /**
+ * @property int $id
  * @property string $name
  * @property string $email
  * @property string $password
@@ -45,6 +46,11 @@ class User extends Model implements
         'email_verified_at' => 'datetime',
         'password'          => 'hashed',
     ];
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
 
     public function getName(): string
     {
