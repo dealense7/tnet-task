@@ -32,8 +32,11 @@ class UpdateTest extends TestCase
     {
         ProvideTestingData::createRandomUserAndAuthorize();
 
+        $country = ProvideTestingData::createCountryRandomItems([], 1)->first();
+
         $data = [
-            'name' => 'test',
+            'name'      => 'test',
+            'countryId' => $country->getId(),
         ];
         $response = $this->jsonWithHeader('PATCH', $this->url('team/9999'), $data);
         $response->assertNotFound();
@@ -45,12 +48,14 @@ class UpdateTest extends TestCase
         ProvideTestingData::createRandomUserAndAuthorize();
 
         $user = ProvideTestingData::createUserRandomItems([], 1)->first();
+        $country = ProvideTestingData::createCountryRandomItems([], 1)->first();
         $team = ProvideTestingData::createTeamRandomItems([
             'user_id' => $user->getId(),
         ], 1)->first();
 
         $data = [
-            'name' => 'test',
+            'name'      => 'test',
+            'countryId' => $country->getId(),
         ];
         $response = $this->jsonWithHeader('PATCH', $this->url('team/' . $team->getId()), $data);
         $response->assertForbidden();
@@ -60,14 +65,15 @@ class UpdateTest extends TestCase
     public function it_should_update_item(): void
     {
         $user = ProvideTestingData::createRandomUserAndAuthorize();
-
+        $country = ProvideTestingData::createCountryRandomItems([], 1)->first();
         $team = ProvideTestingData::createTeamRandomItems([
             'user_id' => $user->getId(),
-            'name' => 'Old Name',
+            'name'    => 'Old Name',
         ], 1)->first();
 
         $data = [
-            'name' => 'New Name',
+            'name'      => 'New Name',
+            'countryId' => $country->getId(),
         ];
         $response = $this->jsonWithHeader('PATCH', $this->url('team/' . $team->getId()), $data);
         $response->assertOk();
@@ -76,8 +82,9 @@ class UpdateTest extends TestCase
         $this->assertDatabaseHas(
             $team->getTable(),
             [
-                'id' => $team->getId(),
-                'name' => 'New Name',
+                'id'         => $team->getId(),
+                'name'       => 'New Name',
+                'country_id' => $country->getId(),
             ]
         );
     }

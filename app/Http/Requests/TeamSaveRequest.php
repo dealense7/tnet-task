@@ -16,7 +16,14 @@ class TeamSaveRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string'],
+            'name'      => [
+                'required',
+                'string',
+            ],
+            'countryId' => [
+                'required',
+                'exists:countries,id',
+            ],
         ];
     }
 }

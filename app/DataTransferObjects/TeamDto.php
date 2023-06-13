@@ -9,7 +9,8 @@ class TeamDto extends DataTransferObject
     public static function toInternal(array $data): array
     {
         return [
-            'name' => self::getData($data, 'name'),
+            'name'       => self::getData($data, 'name'),
+            'country_id' => self::getData($data, 'countryId'),
         ];
     }
 }
