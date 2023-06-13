@@ -6,7 +6,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PlayersBuyRequest;
 use App\Http\Requests\PlayersSellRequest;
-use App\Http\Resources\CountryResource;
 use App\Http\Resources\TransferResource;
 use App\Services\TransferServices;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -24,7 +23,7 @@ class TransferController extends ApiController
 
         $items = $service->findItems($filters, $page, $perPage, $sort);
 
-        return CountryResource::collection($items);
+        return TransferResource::collection($items);
     }
 
     public function sellPlayers(

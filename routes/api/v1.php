@@ -26,6 +26,7 @@ Route::prefix('v1')->group(function () {
             Route::get('/', [TeamController::class, 'info']);
             Route::patch('/{id}', [TeamController::class, 'update']);
         });
+//        9|AH82Lhynhc55QHW4AMe2teIeC4iRMKPiHzluiCoO
 
         // Country Routes
         Route::prefix('countries')->group(function () {

@@ -24,8 +24,7 @@ class TransferRepository implements TransferRepositoryContract
         $items = $model
             ->with([
                 'player.team',
-            ])
-            ->filterByKeyWord($filters);
+            ]);
 
         foreach ($model->parseSort($sort) as $column => $direction) {
             $items = $items->orderBy($column, $direction);
