@@ -82,7 +82,7 @@ class Response extends TestResponse
     {
         parent::assertNotFound();
 
-        $this->assertJson(['message' => __('app.item_not_found')]);
+        $this->assertJson(['message' => 'Item not Found']);
 
         return $this;
     }

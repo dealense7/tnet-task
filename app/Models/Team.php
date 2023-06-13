@@ -51,6 +51,11 @@ class Team extends Model
         return $this->balance;
     }
 
+    public function getFormattedBalance(): string
+    {
+        return number_format($this->getBalance()/100, 2);
+    }
+
     public function owner(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');

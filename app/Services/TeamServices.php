@@ -1,10 +1,12 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace App\Services;
 
+use App\Contracts\Repositories\TeamRepositoryContract;
 use App\Enums\PlayerPosition;
+use App\Exceptions\ItemNotFoundException;
 use App\Models\Player;
 use App\Models\Team;
 use App\Models\User;
@@ -12,6 +14,22 @@ use Illuminate\Support\Collection;
 
 class TeamServices
 {
+    public function __construct(
+        private readonly TeamRepositoryContract $repository
+    )
+    {
+    }
+
+    public function findByUserId(int $userId): Team
+    {
+        $team = $this->repository->findByUserId($userId);
+        if (!$team) {
+            throw new ItemNotFoundException();
+        }
+
+        return $team;
+    }
+
     public function generateTeam(User $user): Team
     {
         /** @var \App\Models\Team $team */

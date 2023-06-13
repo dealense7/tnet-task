@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Models;
 
+use App\Enums\PlayerPosition;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
@@ -64,6 +65,11 @@ class Player extends Model
     public function getType(): int
     {
         return $this->type;
+    }
+
+    public function getTypeToText(): string
+    {
+        return PlayerPosition::from($this->getType())->toText();
     }
 
     public function getMarketValue(): int

@@ -11,14 +11,20 @@ abstract class BaseResource extends JsonResource
 {
     public abstract function transformToExternal(): array;
 
+    public function relationships(): array
+    {
+        return [];
+    }
+
     public function toArray(Request $request): array
     {
         return [
-            'id' => data_get($this->resource, 'id'),
-            'type' => class_basename($this->resource),
+            'id'         => data_get($this->resource, 'id'),
+            'type'       => class_basename($this->resource),
             'attributes' => [
                 ...$this->transformToExternal(),
             ],
+            'relationships' => $this->relationships(),
         ];
     }
 }

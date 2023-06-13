@@ -15,7 +15,8 @@ class TeamFactory extends Factory
     {
         return [
             'name'       => $this->generateFootballTeamName($this->faker),
-            'country_id' => (new Country())->inRandomOrder()?->first()?->getId() ?? Country::factory()->count(30)->create()->first()?->getId()
+            'country_id' => (new Country())->inRandomOrder()?->first()?->getId() ?? Country::factory()->count(30)->create()->first()?->getId(),
+            'balance'    => rand(1000000, 3000000) * 100,
         ];
     }
 
